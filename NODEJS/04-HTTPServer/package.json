@@ -1,0 +1,15 @@
+{
+	"name": "04-httpserver",
+	"version": "1.0.0",
+	"description": "",
+	"main": "task.js",
+	"scripts": {
+		"start": "node --watch task.js"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"@types/node": "^24.3.0"
+	}
+}
