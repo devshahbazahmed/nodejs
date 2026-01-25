@@ -1,0 +1,121 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+:root {
+  --bg-primary-color: #0a0a0a;
+  --bg-secondary-color: #1a1a1a;
+  --bg-danger-color: #c20b0b;
+  --bg-button-color: #1530b9;
+  --bg-input-color: #514f4f;
+  --text-primary-color: #f0f0f0;
+  --text-secondary-color: #f3f3f3;
+  --margin-sm: 0.5rem;
+  --margin-md: 1rem;
+  --margin-lg: 1.5rem;
+  --margin-xl: 2rem;
+  --margin-2xl: 3rem;
+  --padding-sm: 0.5rem;
+  --padding-md: 1rem;
+  --padding-lg: 1.5rem;
+  --padding-xl: 2rem;
+  --padding-2xl: 3rem;
+  --border-radius-sm: 0.25rem;
+  --border-radius-md: 0.5rem;
+  --border-radius-lg: 1rem;
+  --border-radius-xl: 1.25rem;
+  --border-radius-2xl: 1.5rem;
+  --font-size-sm: 0.5rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.5rem;
+  --font-size-xl: 2rem;
+  --font-size-2xl: 3rem;
+}
+
+main {
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-primary-color);
+  color: var(--text-primary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+main .container {
+  gap: var(--padding-md);
+  background-color: var(--bg-secondary-color);
+  padding: var(--padding-lg);
+  border-radius: var(--border-radius-md);
+}
+main .container h2 {
+  text-align: center;
+  font-size: var(--font-size-2xl);
+  margin-bottom: var(--margin-md);
+  padding: var(--padding-md);
+}
+main .container .enter-task {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--padding-md);
+}
+main .container .enter-task #todo-input {
+  background-color: var(--bg-input-color);
+  color: var(--text-secondary-color);
+  border: none;
+  outline: none;
+  border-radius: var(--border-radius-md);
+  padding: var(--padding-sm) var(--padding-md);
+  font-size: var(--font-size-md);
+}
+main .container .enter-task #add-task {
+  background-color: var(--bg-button-color);
+  color: var(--text-secondary-color);
+  border: none;
+  outline: none;
+  border-radius: var(--border-radius-md);
+  padding: var(--padding-sm) var(--padding-md);
+  font-size: var(--font-size-md);
+  cursor: pointer;
+}
+main .todo-output {
+  margin-top: var(--margin-lg);
+}
+main .todo-output .todo-list {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+}
+main .todo-output .todo-list .list-item {
+  background-color: var(--bg-secondary-color);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 10rem;
+  padding: var(--padding-lg);
+  border-radius: var(--border-radius-md);
+  margin: var(--margin-md);
+}
+main .todo-output .todo-list .list-item .task-name {
+  font-size: var(--font-size-md);
+}
+main .todo-output .todo-list .list-item #danger-button {
+  background-color: var(--bg-danger-color);
+  color: var(--text-secondary-color);
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: var(--border-radius-md);
+  padding: var(--padding-sm);
+  font-size: varr(--font-size-md);
+}/*# sourceMappingURL=style.css.map */
