@@ -131,12 +131,17 @@ main {
         padding: var(--padding-lg);
         border-radius: var(--border-radius-md);
         margin: var(--margin-md);
+        cursor: pointer;
 
         .task-name {
           font-size: var(--font-size-md);
         }
 
-        #danger-button {
+        .completed {
+          text-decoration: line-through;
+        }
+
+        .danger-button {
           background-color: var(--bg-danger-color);
           color: var(--text-secondary-color);
           border: none;
@@ -145,6 +150,10 @@ main {
           border-radius: var(--border-radius-md);
           padding: var(--padding-sm);
           font-size: varr(--font-size-md);
+        }
+
+        .danger-button:active {
+          scale: 1.2;
         }
       }
     }
