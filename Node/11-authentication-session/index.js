@@ -12,6 +12,7 @@ app.use(async function (req, res, next) {
   const sessionId = req.headers["session-id"];
   if (!sessionId) return next();
 
+  // Heavy operation: calling database on every call
   const [data] = await db
     .select({
       sessionId: userSessions.id,
