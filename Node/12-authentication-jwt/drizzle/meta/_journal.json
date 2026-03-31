@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1774929561184,
+      "tag": "0000_sturdy_the_fallen",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1774929830573,
+      "tag": "0001_supreme_carnage",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1774934520227,
+      "tag": "0002_loud_silver_samurai",
+      "breakpoints": true
+    }
+  ]
+}

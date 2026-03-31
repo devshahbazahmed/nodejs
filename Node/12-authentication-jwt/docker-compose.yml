@@ -1,0 +1,15 @@
+services:
+  db:
+    image: postgres:17
+    ports:
+      - "5432:5432"
+    restart: always
+    environment:
+      POSTGRES_DB: udemyauth
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+    volumes:
+      - "postgres_data:/var/lib/postgresql/data"
+
+volumes:
+  postgres_data:
