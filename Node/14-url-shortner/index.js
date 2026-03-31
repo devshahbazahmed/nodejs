@@ -1,5 +1,7 @@
+import "dotenv/config";
 import express from "express";
 import userRouter from "./routes/user.routes.js";
+import urlsRouter from "./routes/url.routes.js";
 import { authenticationMiddleware } from "./middleware/auth.middleware.js";
 
 const app = express();
@@ -11,6 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(authenticationMiddleware);
 
 app.use("/user", userRouter);
+app.use("/", urlsRouter);
 
 app.get("/", (_, res) => {
   return res.json({ status: "Server is up and running" });
