@@ -4,6 +4,7 @@ import { usersTable } from "../db/schema.js";
 import { eq } from "drizzle-orm";
 import { createHmac, randomBytes } from "node:crypto";
 import jwt from "jsonwebtoken";
+import { ensureAuthenticated } from "../middleware/auth.middleware.js";
 
 const authRouter = express.Router();
 
@@ -44,7 +45,13 @@ authRouter.post("/signin", async (req, res) => {
   const { email, password } = req.body;
 
   const [user] = await db
-    .select()
+    .select({
+      id: usersTable.id,
+      username: usersTable.username,
+      email: usersTable.email,
+      role: usersTable.role,
+      password: usersTable.password,
+    })
     .from(usersTable)
     .where(eq(usersTable.email, email));
 
@@ -65,6 +72,7 @@ authRouter.post("/signin", async (req, res) => {
     id: user.id,
     useranme: user.username,
     email: user.email,
+    role: user.role,
   };
 
   const token = jwt.sign(payload, process.env.JWT_SECRET);
@@ -75,18 +83,11 @@ authRouter.post("/signin", async (req, res) => {
   });
 });
 
-authRouter.get("/", async (req, res) => {
-  const user = req.user;
-  if (!user) return res.status(401).json({ error: "You are not logged in" });
-
+authRouter.get("/", ensureAuthenticated, async (req, res) => {
   return res.json({ user });
 });
 
-authRouter.patch("/", async (req, res) => {
-  const user = req.user;
-
-  if (!user) return res.status(401).json({ error: "You are not logged in" });
-
+authRouter.patch("/", ensureAuthenticated, async (req, res) => {
   const { username } = req.body;
 
   await db
