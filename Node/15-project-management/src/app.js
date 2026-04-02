@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import healthCheckRouter from "./routes/healthcheck.routes.js";
 
 const app = express();
 
@@ -21,5 +22,7 @@ app.use(
 app.get("/", (req, res) => {
   return res.json({ message: "Hello World!" });
 });
+
+app.use("/api/v1/healthcheck", healthCheckRouter);
 
 export default app;
