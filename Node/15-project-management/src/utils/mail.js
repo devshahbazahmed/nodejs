@@ -17,8 +17,8 @@ const sendEmail = async (options) => {
     host: process.env.MAILTRAP_SMTP_HOST,
     post: process.env.MAILTRAP_SMTP_PORT,
     auth: {
-      user: MAILTRAP_SMTP_USER,
-      pass: MAILTRAP_SMTP_PASS,
+      user: process.env.MAILTRAP_SMTP_USER,
+      pass: process.env.MAILTRAP_SMTP_PASS,
     },
   });
 

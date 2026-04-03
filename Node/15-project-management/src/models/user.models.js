@@ -8,10 +8,10 @@ const userSchema = new Schema(
     avatar: {
       url: String,
       localPath: String,
-      default: {
-        url: `https://placehold.co/200x200`,
-        localPath: "",
-      },
+      // default: {
+      //   url: `https://placehold.co/200x200`,
+      //   localPath: "",
+      // },
     },
     username: {
       type: String,
