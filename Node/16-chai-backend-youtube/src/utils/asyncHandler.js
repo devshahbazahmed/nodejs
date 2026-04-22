@@ -1,3 +1,4 @@
+// @ts-ignore
 const asyncHandler = (requestHandler) => {
   /**
    *
@@ -5,7 +6,7 @@ const asyncHandler = (requestHandler) => {
    * @param {import("express").Response} res
    * @param {import("express").NextFunction} next
    */
-  (req, res, next) => {
+  return (req, res, next) => {
     Promise.resolve(requestHandler(req, res, next)).catch((err) => next(err));
   };
 };
