@@ -1,13 +1,13 @@
 import { z } from 'zod';
 
-export const signupPayloadModel = z.object({
-  firstName: z.string().min(6).max(255),
-  lastName: z.string().min(6).max(255).nullable().optional(),
+export const signupPayloadSchema = z.object({
+  firstName: z.string().min(4).max(45),
+  lastName: z.string().min(4).max(45),
   email: z.email(),
-  password: z.string().min(6).max(50),
+  password: z.string().min(4).max(66),
 });
 
-export const signinPayloadModel = z.object({
+export const signinPayloadSchema = z.object({
   email: z.email(),
-  password: z.string().min(6).max(50),
+  password: z.string().min(3).max(66),
 });

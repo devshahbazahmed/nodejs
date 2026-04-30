@@ -1,10 +1,10 @@
 import {
-  pgTable,
-  uuid,
-  varchar,
   boolean,
+  pgTable,
   text,
   timestamp,
+  uuid,
+  varchar,
 } from 'drizzle-orm/pg-core';
 
 export const usersTable = pgTable('users', {

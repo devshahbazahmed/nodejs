@@ -12,7 +12,7 @@ async function main() {
       console.log(`Server started running on port ${PORT}`)
     );
   } catch (error) {
-    console.error('Error starting http server');
+    console.error('Error in starting server');
     throw error;
   }
 }

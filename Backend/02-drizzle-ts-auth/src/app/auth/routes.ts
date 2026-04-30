@@ -9,10 +9,10 @@ export const authRouter: Router = express.Router();
 
 authRouter.post('/signup', controller.handleSignup.bind(controller));
 
-authRouter.post('signin', controller.handleSignin.bind(controller));
+authRouter.post('/signin', controller.handleSignin.bind(controller));
 
 authRouter.get(
   '/me',
-  restrictToAuthenticatedUser,
+  restrictToAuthenticatedUser(),
   controller.handleMe.bind(controller)
 );

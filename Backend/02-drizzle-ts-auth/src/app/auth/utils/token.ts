@@ -1,11 +1,11 @@
 import jwt from 'jsonwebtoken';
 
-export interface UserInterface {
+export interface UserTokenPayload {
   id: string;
 }
 
-export function createToken(payload: UserInterface) {
-  const token = jwt.sign(payload, process.env.JWT_SECRET!, { expiresIn: '2h' });
+export function createToken(payload: UserTokenPayload) {
+  const token = jwt.sign(payload, process.env.JWT_SECRET!);
   return token;
 }
 
