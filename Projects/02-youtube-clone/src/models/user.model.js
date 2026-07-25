@@ -2,7 +2,6 @@ import mongoose from 'mongoose';
 
 const userSchema = new mongoose.Schema(
   {
-    _id: mongoose.Schema.Types.ObjectId,
     channelName: {
       type: String,
       required: [true, 'Channel Name is required'],
@@ -42,6 +41,6 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-const UserModel = mongoose.model('User', userShcema);
+const UserModel = mongoose.model('User', userSchema);
 
 export default UserModel;
