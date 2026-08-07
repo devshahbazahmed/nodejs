@@ -56,10 +56,8 @@ const login = async (req, res) => {
       });
     }
 
-    const hashPassword = await bcrypt.hash(password, 12);
-
     const isPasswordValid = await bcrypt.compare(
-      hashPassword,
+      password,
       existingUser.password
     );
 
@@ -93,7 +91,7 @@ const login = async (req, res) => {
         logoId: existingUser.logoId,
         token: token,
         subscribers: existingUser.subscribers,
-        subscribedChannel: existingUser.subscribedChannels,
+        subscribedChannels: existingUser.subscribedChannels,
       },
     });
   } catch (error) {
