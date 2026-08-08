@@ -8,12 +8,8 @@ commentRouter.post('/add', checkAuth, commentController.newComment);
 
 commentRouter.delete('/delete/:id', checkAuth, commentController.deleteComment);
 
-commentController.put(
-  '/update/:id',
-  checkAuth,
-  commentController.updateComment
-);
+commentRouter.put('/update/:id', checkAuth, commentController.updateComment);
 
-commentController.get('/:videoId', checkAuth, commentController.getComment);
+commentRouter.get('/:videoId', checkAuth, commentController.getComment);
 
 export default commentRouter;
