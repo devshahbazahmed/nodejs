@@ -44,7 +44,7 @@ const signupUser = async (req, res) => {
   }
 };
 
-const login = async (req, res) => {
+const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
     const existingUser = await UserModel.findOne({ email });
@@ -102,4 +102,68 @@ const login = async (req, res) => {
   }
 };
 
-export { signupUser, login };
+const updateUserProfile = async (req, res) => {
+  try {
+    const { channelName, phone } = req.body;
+    let updatedData = { channelName, name };
+
+    if (req.files && req.files.logoUrl) {
+      const updatedLogoUrl = await cloudinary.uploader.upload(
+        req.files.logoUrl.tempFilePath
+      );
+      updatedData.logoUrl = updatedLogoUrl.secure_url;
+      updatedData.logoId = updatedLogoUrl.public_id;
+    }
+
+    const updatedUser = await UserModel.findByIdAndUpdate(
+      req.user._id,
+      updatedData,
+      { new: true }
+    );
+
+    return res.status(200).json({
+      message: 'User profile updated successfully',
+      success: true,
+      updatedData,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message ?? 'Something went wrong',
+      success: false,
+    });
+  }
+};
+
+const subscribeChannel = async (req, res) => {
+  try {
+    const { channelId } = req.body;
+
+    if (req.user._id === channelId) {
+      return res.status(400).json({
+        message: 'You cannot subscribe to yourself',
+        success: false,
+      });
+    }
+
+    const currentUser = await UserModel.findByIdAndUpdate(req.user._id, {
+      $addToSet: { subscribedChannels: channelId },
+    });
+
+    const subscribedUser = await UserModel.findByIdAndUpdate(channelId, {
+      $inc: { subscribers: 1 },
+    });
+
+    return res.status(200).json({
+      message: 'Subscribed successfully',
+      success: true,
+      data: { currentUser, subscribedUser },
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message ?? 'Something went wrong',
+      success: false,
+    });
+  }
+};
+
+export { signupUser, loginUser, updateUserProfile, subscribeChannel };
