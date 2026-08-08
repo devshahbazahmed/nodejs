@@ -22,4 +22,8 @@ videoRouter.get(
 
 videoRouter.get('/tags/:tag', checkAuth, videoController.getVideoByTags);
 
+videoRouter.post('/like', checkAuth, videoController.likeVideo);
+
+videoRouter.post('/dislike', checkAuth, videoController.dislikeVideo);
+
 export default videoRouter;

@@ -205,6 +205,49 @@ const getVideoByTags = async (req, res) => {
   }
 };
 
+const likeVideo = async (req, res) => {
+  try {
+    const videoId = req.body.videoId;
+
+    const likedVideo = await VideoModel.findByIdAndUpdate(videoId, {
+      $addToSet: { likedBy: req.user._id },
+      $pull: { dislikedBy: req.user._id },
+    });
+
+    return res.status(200).json({
+      message: 'Liked the video',
+      success: true,
+      likeVideo,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: error.message ?? 'Something went wrong',
+      success: false,
+    });
+  }
+};
+
+const dislikeVideo = async (req, res) => {
+  try {
+    const videoId = req.body.videoId;
+    const dislikedVideo = await VideoModel.findByIdAndUpdate(videoId, {
+      $addToSet: { dislikedBy: req.user._id },
+      $pull: { likedBy: req.user._id },
+    });
+
+    return res.status(200).json({
+      message: 'Disliked the video',
+      success: true,
+      dislikedVideo,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: error.message ?? 'Something went wrong',
+      success: false,
+    });
+  }
+};
+
 export {
   uploadVideo,
   updateVideo,
@@ -213,4 +256,6 @@ export {
   getVideoById,
   getVideoByCategory,
   getVideoByTags,
+  likeVideo,
+  dislikeVideo,
 };
