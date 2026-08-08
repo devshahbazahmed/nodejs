@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import cloudinary from '../config/cloudinary';
+import cloudinary from '../config/cloudinary.js';
 import VideoModel from '../models/video.model.js';
 
 const uploadVideo = async (req, res) => {
@@ -107,4 +107,110 @@ const updateVideo = async (req, res) => {
   }
 };
 
-export { uploadVideo, updateVideo };
+const getAllVideos = async (req, res) => {
+  try {
+    const videos = await VideoModel.find().sort({ createdAt: -1 });
+    return res.status(200).json({
+      message: 'All videos fetched successfully',
+      success: true,
+      videos,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: error.message ?? 'Something went wrong',
+      success: false,
+    });
+  }
+};
+
+const getMyVideos = async (req, res) => {
+  try {
+    const myVideos = await VideoModel.findById({ user_id: req.user._id }).sort({
+      createdAt: -1,
+    });
+    return res.status(200).json({
+      message: 'My videos fetched successfully',
+      success: true,
+      myVideos,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: error.message ?? 'Something went wrong',
+      success: false,
+    });
+  }
+};
+
+const getVideoById = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const userId = req.user._id;
+    const video = await VideoModel.findByIdAndUpdate(
+      id,
+      {
+        $addToSet: { viewedBy: userId },
+      },
+      { new: true }
+    );
+
+    if (!video)
+      return res.status(200).json({
+        message: 'Video fetched successfully',
+        success: true,
+        video,
+      });
+  } catch (error) {
+    return res.status(400).json({
+      message: error.message ?? 'Something went wrong',
+      success: false,
+    });
+  }
+};
+
+const getVideoByCategory = async (req, res) => {
+  try {
+    const category = req.params.category;
+    const videoByCategory = await VideoModel.find({ category }).sort({
+      createdAt: -1,
+    });
+    return res.status(200).json({
+      message: 'Video by category fetched successfully',
+      success: true,
+      videoByCategory,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: error.message ?? 'Something went wrong',
+      success: false,
+    });
+  }
+};
+
+const getVideoByTags = async (req, res) => {
+  try {
+    const tag = req.params.tag;
+    const videoByTag = await VideoModel.find({ tags: tag }).sort({
+      createdAt: -1,
+    });
+    return res.status(200).json({
+      message: 'Video by tags fetched successfully',
+      success: true,
+      videoByTag,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: error.message ?? 'Something went wrong',
+      success: false,
+    });
+  }
+};
+
+export {
+  uploadVideo,
+  updateVideo,
+  getAllVideos,
+  getMyVideos,
+  getVideoById,
+  getVideoByCategory,
+  getVideoByTags,
+};
