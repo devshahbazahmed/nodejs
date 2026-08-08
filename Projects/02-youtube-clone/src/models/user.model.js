@@ -27,10 +27,6 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: [true, 'Logo ID is required'],
     },
-    subscribers: {
-      type: Number,
-      default: 0,
-    },
     subscribedChannels: [
       {
         type: mongoose.Schema.Types.ObjectId,
@@ -42,6 +38,10 @@ const userSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+
+userSchema.virtual('subscribers').get(function () {
+  return this.subscribedChannels.length;
+});
 
 const UserModel = mongoose.model('User', userSchema);
 
